@@ -12,8 +12,8 @@ declare interface PaymentProps {
     fullName: string;
     email: string;
     amount: string;
-  }
-  
+}
+
 const Payment = ({
     fullName,
     email,
@@ -79,27 +79,6 @@ const Payment = ({
                             }),
                         });
                         if (result.client_secret) {
-                            // when payment done create a paying in database
-                            // await fetchAPI('/(api)/ride/create', {
-                            //     method: 'POST',
-                            //     headers: {
-                            //         "Content-Type": "application/json"
-                            //     },
-                            //     body: JSON.stringify({
-                            //         origin_address: userAddress,
-                            //         destination_address: destinationAddress,
-                            //         origin_latitude: userLatitude,
-                            //         origin_longitude: userLongitude,
-                            //         destination_latitude: destinationLatitude,
-                            //         destination_longitude: destinationLongitude,
-                            //         ride_time: rideTime.toFixed(0),
-                            //         fare_price: parseInt(amount) * 100,
-                            //         payment_status: 'paid',
-                            //         driver_id: driverId,
-                            //         user_id: userId,
-                            //     })
-                            // })
-
                             intentCreationCallback({
                                 clientSecret: result.client_secret
                             })

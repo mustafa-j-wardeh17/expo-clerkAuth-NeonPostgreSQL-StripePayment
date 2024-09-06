@@ -1,39 +1,60 @@
-//------------------------------------------------------------------------------------
-//---------------To Allow User To Pay Based on Provided Payment Intent----------------
-//------------------------------------------------------------------------------------
+import { Stripe } from "stripe";
 
-import { Stripe } from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
+
 export async function POST(request: Request) {
-    const body = await request.json()
-    const { payment_method_id, payment_intent_id, customer_id } = body;
     try {
-        if (!payment_method_id || !payment_intent_id || !customer_id) {
-            return new Response(JSON.stringify({
-                error: 'Missing required payment information',
-                status: 400
-            }))
+        const body = await request.json();
+        const { name, email, amount } = body;
+
+        if (!name || !email || !amount) {
+            return new Response(JSON.stringify({ error: "Missing required fields" }), {
+                status: 400,
+            });
         }
 
-        const paymentMethod = await stripe.paymentMethods.attach(payment_method_id, {
-            customer: customer_id
-        })
+        // Check if customer exists
+        const doesCustomerExist = await stripe.customers.list({
+            email,
+        });
 
-        const result = await stripe.paymentIntents.confirm(payment_intent_id, {
-            payment_method: paymentMethod.id
-        })
+        let customer;
+        if (doesCustomerExist.data.length > 0) {
+            customer = doesCustomerExist.data[0];
+        } else {
+            customer = await stripe.customers.create({
+                name,
+                email,
+            });
+        }
 
-        return new Response(JSON.stringify({
-            success: true,
-            message: 'Payment confirmed successfully',
-            result: result
-        }))
+        // Create an ephemeral key for the customer
+        const ephemeralKey = await stripe.ephemeralKeys.create(
+            { customer: customer.id },
+            { apiVersion: "2024-06-20" }
+        );
+
+        // Create a payment intent
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: parseInt(amount) * 100, // Convert amount to cents
+            currency: "usd",
+            customer: customer.id,
+            automatic_payment_methods: { enabled: true },
+        });
+
+        return new Response(
+            JSON.stringify({
+                paymentIntent,
+                ephemeralKey,
+                customer: customer.id,
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } }
+        );
     } catch (error) {
-        console.log(error)
-        return new Response(JSON.stringify({
-            error: error,
-            success: false,
-            status: 500
-        }))
+        console.error("Error creating payment:", error)
+        return new Response(JSON.stringify({ error: "Internal Server Error" }), {
+            status: 500,
+        });
     }
 }

@@ -13,7 +13,6 @@ const Welcome = () => {
     isLastSlide
       ? router.replace("/(auth)/sign-up")
       : swiperRef.current?.scrollBy(1)
-
   }
   return (
     <SafeAreaView className="flex h-full p-3 items-center pb-6 justify-between bg-white">

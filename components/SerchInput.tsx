@@ -1,7 +1,8 @@
 
-import { View, Text, KeyboardAvoidingView, Platform, Keyboard, TextInput, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, KeyboardAvoidingView, Platform, Keyboard, TextInput, TouchableWithoutFeedback, Image } from 'react-native';
 import React from 'react';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { icons } from '@/constants';
 
 
 
@@ -26,7 +27,7 @@ const SearchInput = ({ value, placeholder, onChangeText }: CustomInputProps) => 
               placeholderTextColor={'#797979'}
             />
             <View className='absolute right-4 top-1/2 transform items-center justify-center translate-y-1/2  h-[30px]'>
-              <Ionicons name="search" size={24} color="black" />
+              <Image source={icons.Search} className='w-[28px] h-[28px]' resizeMode='contain' />
             </View>
           </View>
         </View>
