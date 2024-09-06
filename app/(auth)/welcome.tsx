@@ -33,6 +33,7 @@ const Welcome = () => {
         activeDot={
           <View className="w-[32px] h-[4px] mx-1 bg-[#0286FF] rounded-full" />
         }
+        onIndexChanged={(index) => setActiveIndex(index)}
       >
         <View className='flex-1 justify-center items-center bg-[#9DD6EB]'>
           <Text className='text-[#fff] text-[30px] font-bold' >Hello Swiper</Text>
