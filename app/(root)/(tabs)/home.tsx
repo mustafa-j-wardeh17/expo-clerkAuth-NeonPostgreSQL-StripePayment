@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -14,11 +14,25 @@ import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
 import SearchInput from '@/components/SerchInput';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { images } from '@/constants';
+import { useFetch } from '@/lib/fetch';
+interface Product {
+  product_id: string; // Unique identifier for the product
+  title: string; // Title of the product
+  description: string; // Description of the product
+  thumbnail: string; // URL of the thumbnail image
+  images: string[]; // Array of image URLs
+  rate: number; // Rating of the product
+  sizes: number[]; // Array of available sizes
+  price: number; // Price of the product
+}
 
 const Home = () => {
   // const { user } = useUser();
   // const { isSignedIn, signOut } = useAuth();
   const [search, setSearch] = useState('')
+
+
+
   const handleSignOut = () => {
     // if (isSignedIn) {
     //   signOut();

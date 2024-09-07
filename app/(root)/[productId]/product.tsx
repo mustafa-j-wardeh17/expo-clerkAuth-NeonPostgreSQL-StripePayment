@@ -11,6 +11,7 @@ import { images } from '@/constants';
 import Payment from '@/components/Payment';
 import { StripeProvider } from '@stripe/stripe-react-native';
 import Swiper from 'react-native-swiper';
+import { useFetch } from '@/lib/fetch';
 
 const Product = () => {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -23,14 +24,14 @@ const Product = () => {
         const actualIndex = index % 3; // Modulo to keep within slide bounds
         setActiveIndex(actualIndex);
     };
-
     const { productId: id } = useLocalSearchParams<{ productId: string }>();
     const bottomSheetRef = useRef<BottomSheet>(null);
     const [like, setLike] = useState(false);
     const rate = 4;
     const [selectedSize, setSelectedSize] = useState<number | null>(null);
     const sizes = [5, 5.5, 6, 6.5, 7];
-
+    const { data: product, loading, error } = useFetch(`/(api)/product/${id}`)
+    console.log(error, loading, product )
     // Function to return star rating
     const rating = () => {
         return Array.from({ length: 5 }).map((_, index) => (

@@ -1,7 +1,6 @@
 
-import { View, Text, KeyboardAvoidingView, Platform, Keyboard, TextInput, TouchableWithoutFeedback, Image } from 'react-native';
+import { View, KeyboardAvoidingView, Platform, Keyboard, TextInput, TouchableWithoutFeedback, Image } from 'react-native';
 import React from 'react';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { icons } from '@/constants';
 
 
