@@ -6,7 +6,7 @@ import { Image, ImageSourcePropType, Text, View } from 'react-native';
 const TabIcon = ({ focused, title, icon }: { icon: ImageSourcePropType, title: string, focused: boolean }) => (
   <View className={`flex flex-row justify-center items-center rounded-full ${focused ? 'bg-[#eeeeee]' : 'bg-[#eeeeee]'}`}>
     <View
-      className={`rounded-full  w-12 h-12 items-center justify-center ${focused ? 'bg-[#0cc25f]' : ''}`}
+      className={`rounded-full  w-12 h-12 items-center justify-center ${focused ? 'bg-[#f59e0b]' : ''}`}
     >
       <Image
         source={icon}
@@ -29,7 +29,7 @@ export default function TabLayout() {
         tabBarInactiveTintColor: 'white',
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: '#333333',
+          backgroundColor: '#202d4c',
           borderRadius: 50,
           paddingBottom: 0,
           overflow: 'hidden',
@@ -40,7 +40,11 @@ export default function TabLayout() {
           justifyContent: 'space-between',
           alignItems: 'center',
           flexDirection: 'row',
-          position: 'absolute'
+          position: 'absolute',
+          // Remove the shadow and border
+          elevation: 0, // for Android
+          shadowOpacity: 0, // for iOS
+          borderTopWidth: 0, // removes border in some cases
         }
       }}
     >

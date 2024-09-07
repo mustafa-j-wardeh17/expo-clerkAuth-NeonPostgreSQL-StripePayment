@@ -97,9 +97,9 @@ const Payment = ({
     };
 
     return (
-        <>
+        <View className="flex-1 w-full">
             <CustomButton
-                label="Buy"
+                label="Checkout"
                 onPress={openPaymentSheet}
             />
 
@@ -129,7 +129,7 @@ const Payment = ({
                     />
                 </View>
             </ReactNativeModal>
-        </>
+        </View>
     );
 };
 

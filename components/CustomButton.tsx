@@ -8,9 +8,9 @@ const CustomButton = ({ label, onPress }: CustomButtonProps) => {
     return (
         <TouchableOpacity
             onPress={onPress}
-            className='bg-[#0b1a3b]  w-full py-3 my-3 rounded-full shadow-md shadow-neutral-400 flex items-center justify-center'
+            className='bg-[#0b1a3b]  w-full py-3  rounded-xl shadow-md shadow-neutral-400 flex items-center justify-center'
         >
-            <Text className='text-white font-bold text-lg '>{label}</Text>
+            <Text className='text-amber-600 font-bold text-lg '>{label}</Text>
         </TouchableOpacity>
     )
 }

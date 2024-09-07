@@ -15,23 +15,14 @@ import SearchInput from '@/components/SerchInput';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { images } from '@/constants';
 import { useFetch } from '@/lib/fetch';
-interface Product {
-  product_id: string; // Unique identifier for the product
-  title: string; // Title of the product
-  description: string; // Description of the product
-  thumbnail: string; // URL of the thumbnail image
-  images: string[]; // Array of image URLs
-  rate: number; // Rating of the product
-  sizes: number[]; // Array of available sizes
-  price: number; // Price of the product
-}
+import { ProductType } from '@/types/types';
 
 const Home = () => {
   // const { user } = useUser();
   // const { isSignedIn, signOut } = useAuth();
   const [search, setSearch] = useState('')
 
-
+  const { data: products, loading, error } = useFetch<ProductType[]>(`/(api)/products`)
 
   const handleSignOut = () => {
     // if (isSignedIn) {
@@ -85,12 +76,12 @@ const Home = () => {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} className='mb-[120px]' contentContainerStyle={{ gap: 20, paddingHorizontal: 20 }}>
             {
-              [1, 2, 3, 4, 5, 6, 7].map((item) => (
-                <TouchableOpacity key={item} onPress={() => router.push(`/(root)/${item}/product`)} className="w-[180px] space-y-3  items-center justify-center ">
+              products?.length !== undefined && products?.map((product, item) => (
+                <TouchableOpacity key={product.product_id} onPress={() => router.push(`/(root)/${product.product_id}/product`)} className="w-[180px] space-y-3  items-center justify-center ">
                   <View className='relative mt-[40px] rounded-xl h-[180px] w-full bg-[#0b1a3b] shadow-sm justify-end shadow-neutral-700 '>
                     <View className='w-full absolute flex-1 items-center transform -top-[10px]  '>
                       <Image
-                        source={images.Jordan3}
+                        source={{ uri: product.thumbnail }}
                         className="w-[180px] h-[120px] shadow-lg  rotate-[30deg]"
                         resizeMode="contain"
                       />
@@ -107,14 +98,14 @@ const Home = () => {
                         <View className='justify-start'>
                           <Text className='text-[20px] text-amber-500 font-bold'>$</Text>
                         </View>
-                        <Text className='text-[40px] text-white font-bold'>329</Text>
+                        <Text className='text-[40px] text-white font-bold'>{parseInt(`${product.price}`)}</Text>
                       </View>
                       <View className='justify-end'>
                         <AntDesign name="heart" size={18} color="red" />
                       </View>
                     </View>
                   </View>
-                  <Text className="text-2xl text-[#2e224f]/90 font-bold mb-2">Component {item}</Text>
+                  <Text className="text-lg text-[#2e224f]/90 font-bold mb-2">{product.title.length > 15 ? product.title.slice(0, 15) + '...' : product.title}</Text>
                 </TouchableOpacity>
               ))
             }
