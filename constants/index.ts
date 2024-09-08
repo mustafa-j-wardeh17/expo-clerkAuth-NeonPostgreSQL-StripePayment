@@ -6,6 +6,9 @@ import Jordan4 from '@/assets/images/jordan4.png'; // Correctly importing the im
 import Home from '@/assets/icons/home.png'; // Correctly importing the image as a React component
 import Profile from '@/assets/icons/profile.png'; // Correctly importing the image as a React component
 import Search from '@/assets/icons/search.png'; // Correctly importing the image as a React component
+import Facebook from '@/assets/icons/facebook.png'; // Correctly importing the image as a React component
+import Google from '@/assets/icons/google.png'; // Correctly importing the image as a React component
+import Instagram from '@/assets/icons/instagram.png'; // Correctly importing the image as a React component
 
 
 
@@ -21,5 +24,8 @@ export const images = {
 export const icons = {
     Home,
     Profile,
-    Search
+    Search,
+    Facebook,
+    Google,
+    Instagram
 }
