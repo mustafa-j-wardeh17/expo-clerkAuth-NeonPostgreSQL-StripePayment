@@ -1,58 +1,94 @@
-import { View, Text, ScrollView } from 'react-native'
-import React, { useState } from 'react'
-import { router } from 'expo-router';
-import CustomButton from '@/components/CustomButton';
+import { View, Text, ScrollView, Image } from 'react-native';
+import React, { useState } from 'react';
 import CustomInput from '@/components/CustomInput';
+import CustomButton from '@/components/CustomButton';
+import { Link, router } from 'expo-router';
 import GoogleAuthButton from '@/components/GoogleAuthButton';
+import { images } from '@/constants';
+import AuthInput from '@/components/AuthInput';
 
 const SignIn = () => {
   const [user, setUser] = useState({
-    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
   });
 
-  // Function to handle input changes
   const handleInputChange = (field: string, value: string) => {
-    setUser((prev) => ({ ...prev, [field]: value }))
+    setUser((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSignIn = async () => {
-    router.push('/(root)/(tabs)/home')
-  }
+  const onSignInPress = async () => {
+    // Add sign-in logic here
+  };
+
   return (
-    <ScrollView className='flex-1 relative '>
-      <View className="p-3 justify-end bg-gray-200 w-full h-[200px]">
-        <Text className="text-3xl font-extrabold">Welcome 👋</Text>
+    <ScrollView
+      contentContainerStyle={{
+        flexGrow: 1,
+        backgroundColor: '#fcc028ee',
+        paddingHorizontal: 24,
+        paddingVertical: 32,
+      }}
+    >
+      <View className="flex-1 justify-center px-6 py-12">
+        {/* Header */}
+        <View className="mb-12 items-center">
+          <Image source={images.NikeImage} className="w-24 h-9" resizeMode='contain' />
+          <Text className="text-4xl font-bold text-white mt-6">Sign In</Text>
+        </View>
+
+        {/* Form */}
+        <View className="bg-white rounded-lg shadow-lg p-8">
+          <AuthInput
+            value={user.email}
+            label={'Email'}
+            placeholder={'Email'}
+            secure={false}
+            onChangeText={(value) => handleInputChange('email', value)}
+          />
+          <AuthInput
+            value={user.password}
+            label={'Password'}
+            placeholder={'Enter Password'}
+            secure={true}
+            onChangeText={(value) => handleInputChange('password', value)}
+          />
+
+          <View className="mt-6">
+            <CustomButton
+              label='Sign In'
+              onPress={onSignInPress}
+              textStyle="text-yellow-600"
+              buttonStyle="bg-white border border-yellow-600"
+            />
+            <Text className="text-center text-gray-600 mt-4 text-sm">
+              By Signing In, you agree to our{' '}
+              <Text className="text-yellow-600 font-semibold">Terms</Text> &{' '}
+              <Text className="text-yellow-600 font-semibold">Privacy Policy</Text>
+            </Text>
+            <Text className='text-center text-gray-600 mt-3 text-sm'>
+              or
+            </Text>
+          </View>
+
+          {/* Google Auth Button */}
+          <View className="my-3">
+            <GoogleAuthButton />
+          </View>
+
+          {/* Footer */}
+          <View className="flex-row justify-center mt-6">
+            <Text className="text-gray-600 text-sm">
+              Don't have an account?{' '}
+              <Link href={'/(auth)/sign-up'} className="text-yellow-600 font-bold">
+                Sign Up
+              </Link>
+            </Text>
+          </View>
+        </View>
       </View>
-      <View className="flex flex-col p-4">
-
-        <CustomInput
-          value={user.email}
-          label={'Email'}
-          placeholder={'Enter your email'}
-          secure={false}
-          onChangeText={(value) => handleInputChange('email', value)}
-        />
-        <CustomInput
-          value={user.password}
-          label={'Password'}
-          placeholder={'Enter your password'}
-          secure={true}
-          onChangeText={(value) => handleInputChange('password', value)}
-        />
-
-        <CustomButton
-          label='Sign In'
-          onPress={handleSignIn}
-        />
-      </View>
-      <View className='h-[2px] w-full bg-slate-200' />
-      <GoogleAuthButton />
-
     </ScrollView>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

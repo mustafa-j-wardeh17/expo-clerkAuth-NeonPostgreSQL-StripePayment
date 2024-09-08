@@ -22,17 +22,17 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
-      <ClerkLoaded>
-        <slot />
+    // <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+    //   <ClerkLoaded>
+    //     <slot />
         <Stack>
           <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
           <Stack.Screen name="(root)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
         </Stack>
-      </ClerkLoaded>
-    </ClerkProvider>
+    //   </ClerkLoaded>
+    // </ClerkProvider>
   );
 }
 
