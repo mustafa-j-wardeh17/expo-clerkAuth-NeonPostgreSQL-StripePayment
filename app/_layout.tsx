@@ -4,7 +4,7 @@ import * as SecureStore from 'expo-secure-store'
 import { ClerkProvider, ClerkLoaded } from '@clerk/clerk-expo'
 
 // import { tokenCache } from '@/lib/auth';
-import { LogBox } from 'react-native';
+import { LogBox, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { tokenCache } from '@/lib/auth';
 
@@ -22,17 +22,12 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
-      <ClerkLoaded>
-        <slot />
-        <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="(root)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </ClerkLoaded>
-    </ClerkProvider>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack.Screen name="(root)" options={{ headerShown: false }} />
+      <Stack.Screen name="+not-found" />
+    </Stack>
   );
 }
 
