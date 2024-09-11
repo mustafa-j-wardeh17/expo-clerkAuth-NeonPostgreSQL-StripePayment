@@ -22,14 +22,6 @@ export default function RootLayout() {
   }
 
   return (
-<<<<<<< HEAD
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-      <Stack.Screen name="(root)" options={{ headerShown: false }} />
-      <Stack.Screen name="+not-found" />
-    </Stack>
-=======
     // <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
     //   <ClerkLoaded>
     //     <slot />
@@ -41,7 +33,6 @@ export default function RootLayout() {
         </Stack>
     //   </ClerkLoaded>
     // </ClerkProvider>
->>>>>>> 4491e4e (style sign-in and sign-up pages)
   );
 }
 

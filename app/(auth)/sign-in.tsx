@@ -19,6 +19,7 @@ const SignIn = () => {
 
   const onSignInPress = async () => {
     // Add sign-in logic here
+    router.push('/(root)/(tabs)/home')
   };
 
   return (
