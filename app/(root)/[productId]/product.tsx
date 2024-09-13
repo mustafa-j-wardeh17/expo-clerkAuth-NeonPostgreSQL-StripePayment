@@ -13,6 +13,7 @@ import { StripeProvider } from '@stripe/stripe-react-native';
 import Swiper from 'react-native-swiper';
 import { useFetch } from '@/lib/fetch';
 import { ProductType } from '@/types/types';
+import { CachedImage } from '@/components/CachedImage';
 
 const Product = () => {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -106,8 +107,8 @@ const Product = () => {
                                         {productImages.length > 0 ? (
                                             productImages.map((image, idx) => (
                                                 <View key={idx} className="flex-1  justify-center items-center">
-                                                    <Image
-                                                        source={{ uri: image }}
+                                                    <CachedImage
+                                                        uri={image}
                                                         className="w-full h-full mb-5 rounded-xl"
                                                         resizeMode='center'
                                                         onError={() => console.log(`Failed to load image: ${image}`)} // Debugging line
