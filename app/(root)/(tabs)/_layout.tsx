@@ -20,7 +20,6 @@ const TabIcon = ({ focused, title, icon }: { icon: ImageSourcePropType, title: s
 
 
 export default function TabLayout() {
-
   return (
     <Tabs
       initialRouteName='home'
